@@ -1,24 +1,59 @@
 {
   "name": "@zllling/pangolin",
-  "version": "1.0.0",
-  "description": "tcp proxy",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
+  "version": "2.0.0",
+  "description": "A typed, multiplexed TCP reverse tunnel for Node.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
+  "files": [
+    "dist",
+    "readme.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepack": "npm run build",
+    "package:pack": "node scripts/pack-package.mjs",
+    "test:package": "node scripts/verify-package.mjs",
+    "check": "npm run lint && npm test && npm run test:package",
+    "lint": "biome check .",
+    "format": "biome check --write ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ForXd/pangolin.git"
   },
-  "keywords": [],
+  "keywords": [
+    "tcp",
+    "proxy",
+    "tunnel",
+    "reverse-proxy",
+    "typescript"
+  ],
   "author": "zllling",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ForXd/pangolin/issues"
   },
-  "homepage": "https://github.com/ForXd/pangolin#readme"
+  "homepage": "https://github.com/ForXd/pangolin#readme",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "26.6.2",
+    "typescript": "7.0.2"
+  }
 }

@@ -1,4 +1,6 @@
-/doc
-/test
-test.bat
-/node_moudules
+node_modules/
+dist/
+.artifacts/
+*.tgz
+coverage/
+.DS_Store
