@@ -13,6 +13,7 @@
 | Repository | `pangolin` |
 | Workflow filename | `npm-publish.yml` |
 | Environment | 留空（workflow 未配置 environment） |
+| Allowed actions | 勾选 `Allow npm publish`（仅 stage publish 不足以运行本工作流） |
 
 这是 npm 账户侧的设置，不随 Git 提交生效。使用 GitHub 托管的 runner，发布 job 具有 `id-token: write`，无需在仓库中存储 `NPM_TOKEN`。首次绑定可能要求维护者完成 npm 登录与二次验证。官方要求见 [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers/)。
 
